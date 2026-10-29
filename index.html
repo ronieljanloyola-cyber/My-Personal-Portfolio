@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      padding-top: 80px; 
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      background-attachment: fixed;
+    }
+    
+    .header-div {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 20px 40px;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(10px);
+      color: white;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .header-div::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+
+    .header-title {
+      float: left;
+      letter-spacing: 1.5px;
+      color: #38bdf8;
+    }
+    
+    .nav-links {
+      float: right;
+    }
+
+    .nav-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 20px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-links a:hover {
+      background-color: #38bdf8;
+      color: #0f172a;
+      text-decoration: none;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(56, 189, 248, 0.4);
+    }
+    
+    .hero {
+      text-align: center;
+      padding: 100px 20px;
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+      color: white;
+      border-bottom: 4px solid #4f46e5;
+      box-shadow: inset 0 -10px 20px rgba(0,0,0,0.2);
+    }
+
+    .profile-img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 25px;
+      border: 5px solid #38bdf8;
+      box-shadow: 0 10px 30px rgba(56, 189, 248, 0.4);
+      transition: transform 0.4s ease, box-shadow 0.3s ease;
+    }
+
+    .profile-img:hover {
+      transform: scale(1.08) rotate(3deg);
+      box-shadow: 0 15px 40px rgba(56, 189, 248, 0.6);
+    }
+    
+    .hero h1 {
+      font-size: 50px;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .hero p {
+      margin-bottom: 30px;
+      font-size: 20px;
+      color: #cbd5e1;
+    }
+    
+    .button {
+      display: inline-block;
+      padding: 14px 32px;
+      background: #38bdf8;
+      color: #0f172a;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(56, 189, 248, 0.3);
+    }
+
+    .button:hover {
+      background: #ffffff;
+      color: #0f172a;
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(255, 255, 255, 0.4);
+    }
+    
+    .content-section {
+      padding: 70px 40px;
+      text-align: center;
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(10px);
+      margin: 30px auto;
+      max-width: 1100px;
+      border-radius: 15px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .content-section:hover {
+      transform: translateY(-3px);
+    }
+    
+    .content-section h2 {
+      margin-bottom: 40px;
+      font-size: 34px;
+      color: #ffffff;
+      position: relative;
+    }
+
+    .content-section h2::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: #38bdf8;
+      margin: 10px auto 0;
+      border-radius: 2px;
+    }
+    
+    .row::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+    
+    [class*="col-"] {
+      float: left;
+      padding: 15px;
+      width: 100%;
+    }
+    
+    .col-4 {
+      width: 33.33%;
+    }
+
+    #about p {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 18px;
+      color: #cbd5e1;
+      line-height: 1.9;
+      background: rgba(15, 23, 42, 0.5);
+      padding: 25px;
+      border-radius: 10px;
+      border-left: 4px solid #38bdf8;
+    }
+
+    .skill-card {
+      padding: 25px 20px;
+      background: rgba(15, 23, 42, 0.8);
+      border-radius: 12px;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.3s ease;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(56, 189, 248, 0.25);
+      border-color: #38bdf8;
+    }
+
+    .skill-card h3 {
+      color: #38bdf8;
+      margin-bottom: 12px;
+      font-size: 22px;
+    }
+
+    .skill-card p {
+      color: #94a3b8;
+      font-size: 16px;
+    }
+
+    .project {
+      padding: 35px 25px;
+      background: rgba(15, 23, 42, 0.8);
+      border-radius: 12px;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.3s ease;
+    }
+
+    .project:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(56, 189, 248, 0.25);
+      border-color: #38bdf8;
+    }
+
+    .project h3 {
+      margin-bottom: 15px;
+      color: #38bdf8;
+      font-size: 24px;
+    }
+
+    .project p {
+      margin-bottom: 25px;
+      color: #94a3b8;
+    }
+
+    .project a {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: rgba(56, 189, 248, 0.1);
+      color: #38bdf8;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: bold;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .project a:hover {
+      background-color: #38bdf8;
+      color: #0f172a;
+      transform: scale(1.08);
+      box-shadow: 0 4px 15px rgba(56,189,248,0.4);
+    }
+    
+    #contact p {
+      font-size: 20px;
+      color: #cbd5e1;
+    }
+
+    #contact a {
+      color: #38bdf8;
+      text-decoration: none;
+      font-weight: bold;
+      border-bottom: 2px dashed #38bdf8;
+      transition: all 0.3s ease;
+    }
+
+    #contact a:hover {
+      color: #ffffff;
+      border-bottom: 2px solid #ffffff;
+      background-color: rgba(56, 189, 248, 0.2);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    
+    .footer-div {
+      text-align: center;
+      padding: 40px 20px;
+      background: #090d16;
+      color: white;
+      margin-top: 50px;
+      box-shadow: inset 0 5px 15px rgba(0,0,0,0.5);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .footer-div a {
+      color: #38bdf8;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    .footer-div a:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+    
+    @media only screen and (max-width: 800px) {
+      .col-4 {
+        width: 50%;
+      }
+    }
+    
+    @media only screen and (max-width: 500px) {
+      .header-title, .nav-links {
+        float: none;
+        text-align: center;
+      }
+    
+      .nav-links {
+        margin-top: 15px;
+      }
+
+      .nav-links a {
+        margin: 0 3px;
+        padding: 4px 6px;
+        font-size: 12px;
+      }
+    
+      .hero h1 {
+        font-size: 32px;
+      }
+    
+      .content-section {
+        padding: 45px 15px;
+        width: 92%;
+      }
+    
+      .col-4 {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body id="top">
+
+  <div class="header-div">
+    <h2 class="header-title">Loyola, Roniel Jan</h2>
+    <div class="nav-links">
+      <a href="#about">About Me</a>
+      <a href="#skills">Skills & Tools</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+      <a href="#top">Top</a>
+    </div>
+  </div>
+
+  <div class="hero">
+    <img src="Rj.jpg" alt="Roniel Jan Loyola" class="profile-img">
+    <h1>Hi, I'm Roniel</h1>
+    <p>I'm a web designer and developer.</p>
+    <a class="button" href="#projects">See my work</a>
+  </div>
+ 
+  <div id="about" class="content-section">
+    <h2>About Me</h2>
+    <p>Hi! I'm Roniel, an aspiring software developer and freelance professional passionate about creating functional, user-friendly, and creative digital solutions. I enjoy learning new technologies, solving problems, and developing websites and applications that meet people's needs. I'm always eager to improve my skills, explore new opportunities, and turn ideas into reality through technology.</p>
+  </div>
+ 
+  <div id="skills" class="content-section">
+    <h2>Skills & Tools</h2>
+    <div class="row">
+      <div class="col-4">
+        <div class="skill-card">
+          <h3>Frontend Development</h3>
+          <p>HTML5, CSS3, Responsive Web Design, Grid View Layouts</p>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="skill-card">
+          <h3>Programming Languages</h3>
+          <p>Java, Python, C++</p>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="skill-card">
+          <h3>Developer Tools</h3>
+          <p>Visual Studio Code, Git, Live Server, Command Prompt</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div id="projects" class="content-section">
+    <h2>Projects</h2>
+    <div class="row">
+      <div class="col-4">
+        <div class="project">
+          <h3>Project One</h3>
+          <p>This page is about Philippine Culture.</p>
+          <a href="https://jmsdnkira.github.io/FILIPINO-BLOG-/?fbclid=IwZXh0bgNhZW0CMTEAcGRvZgNzcnRjBmFwcF9pZA80Mzc2MjYzMTY5NzM3ODgAAR8FJyfU6ASfvA17nWJu31r4kUmB4CGT00KBxUzF6rSLNI_mMaQROJLq6E8qVQ_aem_yufE5OLNRZYgK3WrwLbt5w" target="_blank">Click here</a>
+        </div>
+      </div>
+        
+      <div class="col-4">
+        <div class="project">
+          <h3>Project Two</h3>
+          <p>This project page is about User Settings.</p>
+          <a href="https://ohrealeiwycacabalhin-ops.github.io/User-settings/" target="_blank">Click here</a>
+        </div>
+      </div>
+        
+      <div class="col-4">
+        <div class="project">
+          <h3>Project Three</h3>
+          <p>This Page Project is about Price Plans.</p>
+          <a href="https://loyolafrancisdion-hub.github.io/PRICE-PLANNING-/" target="_blank">Click here</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div id="contact" class="content-section">
+    <h2>Contact</h2>
+    <p>Email me at <a href="mailto:ronieljanloyola@gmail.com">ronieljanloyola@gmail.com</a></p>
+  </div>
+
+  <div class="footer-div">
+    <p>Loyola, Roniel Jan</p>
+    <p style="margin-top: 10px;">
+      <a href="#top">Go to Top of Document</a>
+    </p>
+  </div>
+
+</body>
+</html>
